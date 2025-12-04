@@ -1,26 +1,36 @@
 name: Mini CI/CD Pipeline
 
-on: [push]
+# Trigger: Jalan setiap kali ada push ke branch main
+on:
+  push:
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Ambil Kode
-      uses: actions/checkout@v4       # <-- Sudah diupdate ke v4
+    # 1. Mengambil kode terbaru dari repository
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-    - name: Setup Python
-      uses: actions/setup-python@v5   # <-- Sudah diupdate ke v5
+    # 2. Menyiapkan environment Python
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
         python-version: '3.9'
 
-    - name: Jalankan Test
-      run: python test_app.py
+    # 3. Menjalankan Script Pengujian
+    - name: Run Automated Tests
+      run: |
+        python test_app.py
+        echo "Test selesai dijalankan."
 
-    - name: Upload Laporan
+    # 4. Mengupload Hasil Laporan (Artifact)
+    # Langkah ini memenuhi syarat "Hasil test dikirimkan/disimpan"
+    - name: Upload Test Report
       if: always()
-      uses: actions/upload-artifact@v4  # <-- INI YANG BIKIN ERROR TADI (Sekarang v4)
+      uses: actions/upload-artifact@v4
       with:
         name: laporan-pengujian
         path: test-report.txt
