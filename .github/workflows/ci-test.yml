@@ -8,10 +8,10 @@ jobs:
 
     steps:
     - name: Ambil Kode
-      uses: actions/checkout@v4  # <-- Ganti jadi v4
+      uses: actions/checkout@v4       # <-- Sudah diupdate ke v4
 
     - name: Setup Python
-      uses: actions/setup-python@v5 # <-- Ganti jadi v5
+      uses: actions/setup-python@v5   # <-- Sudah diupdate ke v5
       with:
         python-version: '3.9'
 
@@ -20,7 +20,7 @@ jobs:
 
     - name: Upload Laporan
       if: always()
-      uses: actions/upload-artifact@v4  # <-- INI KUNCINYA (Ganti jadi v4)
+      uses: actions/upload-artifact@v4  # <-- INI YANG BIKIN ERROR TADI (Sekarang v4)
       with:
         name: laporan-pengujian
         path: test-report.txt
