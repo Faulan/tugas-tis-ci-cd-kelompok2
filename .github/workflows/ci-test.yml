@@ -8,24 +8,19 @@ jobs:
 
     steps:
     - name: Ambil Kode
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4  # <-- Ganti jadi v4
 
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5 # <-- Ganti jadi v5
       with:
         python-version: '3.9'
-
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Jalankan Test
       run: python test_app.py
 
     - name: Upload Laporan
-      if: always()  # Tetap upload meski test gagal (agar bisa dicek)
-      uses: actions/upload-artifact@v3
+      if: always()
+      uses: actions/upload-artifact@v4  # <-- INI KUNCINYA (Ganti jadi v4)
       with:
         name: laporan-pengujian
         path: test-report.txt
