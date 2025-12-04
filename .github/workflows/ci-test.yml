@@ -1,0 +1,26 @@
+name: Mini CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Run Automated Tests
+      run: python test_app.py
+
+    - name: Upload Test Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: laporan-pengujian
+        path: test-report.txt
